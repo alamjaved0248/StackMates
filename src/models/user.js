@@ -57,12 +57,12 @@ const userSchema = new mongoose.Schema(
     },
     photoURL: {
       type: String,
-      default: "https://via.placeholder.com/150",
-      validate(value) {
-        if (!validator.isURL(value)) {
-          throw new Error("Invalid photoURL");
-        }
-      },
+      default: "https://picsum.photos/200/300",
+      //validate(value) {
+      //if (!validator.isURL(value)) {
+      //  throw new Error("Invalid photoURL");
+      //}
+      //},
     },
   },
   { timestamps: true }

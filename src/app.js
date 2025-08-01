@@ -7,8 +7,15 @@ const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const { userAuth } = require("./middleware/auth");
+const cors = require("cors");
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request");
@@ -34,10 +41,10 @@ app.get("/user", async (req, res) => {
     res.status(500).send(err);
   }
 });
-app.get("/feed", async (req, res) => {
-  const users = await User.find();
-  res.send(users);
-});
+//app.get("/feed", async (req, res) => {
+//  const users = await User.find();
+//  res.send(users);
+//});
 app.delete("/user", async (req, res) => {
   const userId = req.body.userId;
 

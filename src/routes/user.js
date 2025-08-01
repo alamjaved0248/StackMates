@@ -11,7 +11,7 @@ userRouter.get("/user/request/recieved", userAuth, async (req, res) => {
       status: "interested",
     }).populate(
       "fromUserId",
-      "firstName LastName photoUrl about skills age gender"
+      "firstName lastName photoURL about skills age gender"
     );
     res.json({
       message: "Connection requests recieved",
@@ -21,7 +21,7 @@ userRouter.get("/user/request/recieved", userAuth, async (req, res) => {
     res.status(400).json({ message: "Error" + err.message });
   }
 });
-const USER_SAFE_DATA = "firstName lastName photoUrl about skills age gender";
+const USER_SAFE_DATA = "firstName lastName photoURL about skills age gender";
 userRouter.get("/user/connections", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
@@ -69,7 +69,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         { _id: { $ne: loggedInUser._id } },
       ],
     })
-      .select(USER_SAFE_DATA)
+      // .select(USER_SAFE_DATA)
       .skip(skip)
       .limit(limit);
     res.json({
